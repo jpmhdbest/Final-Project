@@ -12,9 +12,13 @@ $(function() {
             $('.btn-login').attr('href', '/api/login?url=/');
             $('.btn-logout').attr('href','/api/logout?url=/');
 
+            this.router = new Router();
             this.setEventListeners();
             this.getUser();
+
+            Backbone.history.start({pushState: true});
         },
+
         setEventListeners: function() {
             var self = this;
             $('.menu-crud .item a').click(function(ev) {
@@ -24,14 +28,19 @@ $(function() {
                 $el.addClass("active");
 
                 if ($el.hasClass('menu-list')) {
-                    self.showList();
+                    self.router.navigate('list', {trigger: true});
                 }
 
                 if ($el.hasClass('menu-create')) {
-                    self.showForm();
+                    self.router.navigate('new', {trigger: true});
                 }
             });
+
+            $('.navbar-brand').click(function() {
+                self.router.navigate('', {trigger: true});
+            });
         },
+
         getUser: function() {
             var self = this;
             $.ajax({
@@ -61,6 +70,9 @@ $(function() {
            $('.menu-loading').addClass('hidden');
            $('.btn-login').addClass('hidden');
            $('.menu-user').removeClass('hidden');
+        },
+        showHome: function() {
+            $('.app-content').html('');
         },
         showList: function() {
             var $listTemplate = getTemplate('tpl-thesis-list');
@@ -112,6 +124,38 @@ $(function() {
 
     }
 
+
+    var Router = Backbone.Router.extend({
+        routes: {
+            '': 'onHome',
+            'thesis-:id': 'onView',
+            'new': 'onCreate',
+            'edit': 'onEdit',
+            'list': 'onList'
+        },
+
+       onHome: function() {
+            app.showHome();
+       },
+
+       onView: function(id) {
+           console.log('thesis id', id);
+       },
+
+       onCreate: function() {
+            app.showForm();
+       },
+
+       onEdit: function() {
+
+       },
+
+       onList: function() {
+            app.showList();
+       }
+
+    });
     app.init();
+
 
 });
