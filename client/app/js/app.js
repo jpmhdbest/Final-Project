@@ -105,11 +105,12 @@ $(function() {
         displayLoadedList: function(list) {
             console.log('response', list);
             //  use tpl-thesis-list-item to render each loaded list and attach it
-
+            var $formTemplate = getTemplate('tpl-thesis-list-item', object);
+            $('.app-content').html($formTemplate);
         },
         save: function(object) {
             var self = this;
-
+            
         }
 
 
