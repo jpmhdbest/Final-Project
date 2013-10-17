@@ -31,6 +31,8 @@ $(function() {
                 }
                 if ($el.hasClass('menu-search')) {
                     $('.search-input').removeClass('hidden');
+                    var $listTemplate = getTemplate('tpl-thesis-list');
+                    $('.app-content').html($listTemplate);
                     self.router.navigate('search?=', {trigger: true});
                 }
             });
