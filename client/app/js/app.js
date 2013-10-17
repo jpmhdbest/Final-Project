@@ -148,11 +148,14 @@ $(function() {
             if (list.length === 0) {
                 $('.app-content').html("There are no thesis files at the moment.");
             } else {
+
                 _.each(list, function(item) {
                     if (category === 1){
                         var $thesisItem = $(getTemplate('tpl-thesis-list-item', item));
                     } else {
-                        var $thesisItem = $(getTemplate('tpl-thesis-list-item2', item));
+                        if (item.owners[0] == self.user.Id){
+                            var $thesisItem = $(getTemplate('tpl-thesis-list-item2', item));
+                        }
                     }
                     var id = item.Id
                     if (item.Key) {
@@ -160,9 +163,6 @@ $(function() {
                     }
                     $thesisItem.find('.btn-edit').click(function() {
                         self.router.navigate('edit-' + id, {trigger: true});
-                    });
-                    $thesisItem.find('.btn-view').click(function() {
-                        self.router.navigate('thesis-' + id, {trigger: true});
                     });
                     $thesisItem.find('.btn-delete').click(function() {
                         self.router.navigate('delete-' + id, {trigger: true});
