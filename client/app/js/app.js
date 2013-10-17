@@ -164,6 +164,9 @@ $(function() {
                     $thesisItem.find('.btn-edit').click(function() {
                         self.router.navigate('edit-' + id, {trigger: true});
                     });
+                    $thesisItem.find('.btn-view').click(function() {
+                        self.router.navigate('thesis-' + id, {trigger: true});
+                    });
                     $thesisItem.find('.btn-delete').click(function() {
                         self.router.navigate('delete-' + id, {trigger: true});
                     });
