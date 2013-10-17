@@ -13,7 +13,7 @@
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527242004024374";
-      fjs.parentNode.insertBefore(js, fjs);
+      fjs.parentNode.insertBefore(js, fjs); 
     }(document, 'script', 'facebook-jssdk'));</script>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -89,9 +89,8 @@
 
         <script id="tpl-thesis-list-item" type="text/x-handlebars-template">
             <tr data-id="{{Id}}">
-                <td><center><strong>{{Title}}</strong> ({{Year}})</center></td>
+                <td><center><strong><a href='javascript:void(0)' class='btn-view'>{{Title}}</a></strong> ({{Year}})</center></td>
                 <td><center>
-                    <a href='javascript:void(0)' class='btn-view'>View</a> &nbsp;
                     <a href='javascript:void(0)' class='btn-edit'>Edit</a> &nbsp;
                     <a href='javascript:void(0)' class='btn-delete'>Delete</a> &nbsp;
                 </center></td>
@@ -110,7 +109,7 @@
 
         <script id="tpl-thesis-form" type="text/x-handlebars-template">
             <div class='col-md-7 thesis-form'>
-                <form role="form">
+                <form role="form" id="new-thesis-form">
                     <div class="form-group">
                         <label for="year-input">Year</label>
                         <select id='year-input' name='Year' class="form-control">
@@ -122,16 +121,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="tite-input">Title</label>
-                        <input id='title-input' type="text" class="form-control" name='Title' placeholder="Enter title.." value='{{Title}}'>
+                        <label for="tite-input">Title</label>*
+                        <input id='title-input' type="text" class="form-control" name='Title' value='{{Title}}'>
                     </div>
                     <div class="form-group">
                         <label for="subtite-input">Subtitle</label>
-                        <input id='subtitle-input' type="text" class="form-control" name='Subtitle' placeholder="Enter subtitle.." value='{{Subtitle}}'>
+                        <input id='subtitle-input' type="text" class="form-control" name='Subtitle' value='{{Subtitle}}'>
                     </div>
                     <div class="form-group">
-                        <label for="description-input">Description</label>
-                        <textarea id='description-input' name='Description' placeholder="Enter description.." class="form-control" rows="3">{{Description}}</textarea>
+                        <label for="description-input">Description</label>*
+                        <textarea id='description-input' name='Description' class="form-control" rows="3">{{Description}}</textarea>
                     </div>
                     {{#if Id}}
                     <input id='subtitle-input' type="text" style="display:none" name='Id' value='{{Id}}'>
