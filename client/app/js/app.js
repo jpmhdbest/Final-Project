@@ -46,12 +46,10 @@ $(function() {
                 method: 'GET',
                 url: '/api/users/me',
                 success: function(me) {
-                    console.log(me);
                     self.user = me;
                     self.showLogout();
                 },
                 error: function(err) {
-                    console.log('you have not authenticated');
                     self.showLogin();
                 }
             });
@@ -110,6 +108,7 @@ $(function() {
             });
             $('.btn-cancel').click(function() {
                 self.router.navigate('list', {trigger: true});
+                $('.menu-list').addClass("active");
                 return false;
             });
             self.setEventListeners();
@@ -236,7 +235,7 @@ $(function() {
             app.searchThesis(query);
        },
        onView: function(id) {
-           console.log('thesis id', id);
+            $('.menu-list').removeClass("active");
             app.getThesisByID(id, function(item) {
                 app.showThesis(item);
                 FB.XFBML.parse();
@@ -246,6 +245,7 @@ $(function() {
             app.showForm();
        },
        onEdit: function(id) {
+            $('.menu-list').removeClass("active");
             app.getThesisByID(id, function(item) {
                 app.showForm(item);
             });
