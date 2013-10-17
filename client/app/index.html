@@ -74,12 +74,11 @@
         <!-- =================== -->
         <script id="tpl-thesis-list" type="text/x-handlebars-template">
             <div class='col-md-7'>
-                <table class='table table-hover'>
+                <table class='table table-hover table-bordered'>
                     <thead>
                         <tr>
-                            <th>Year</th>
-                            <th>Title</th>
-                            <th></th>
+                            <th><center>Thesis</center></th>
+                            <th><center>Options</center></th>
                         </tr>
                     </thead>
                     <tbody class='thesis-list'>
@@ -90,13 +89,12 @@
 
         <script id="tpl-thesis-list-item" type="text/x-handlebars-template">
             <tr data-id="{{Id}}">
-                <td>{{Year}}</td>
-                <td>{{Title}}</td>
-                <td>
+                <td><center><strong>{{Title}}</strong> ({{Year}})</center></td>
+                <td><center>
                     <a href='javascript:void(0)' class='btn-view'>View</a> &nbsp;
                     <a href='javascript:void(0)' class='btn-edit'>Edit</a> &nbsp;
                     <a href='javascript:void(0)' class='btn-delete'>Delete</a> &nbsp;
-                </td>
+                </center></td>
             </tr>
         </script>
 
