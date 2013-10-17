@@ -1,4 +1,5 @@
 $(function() {
+    var category =1;
     var app = {
         init: function() {
             this.user = {};
@@ -17,12 +18,17 @@ $(function() {
         },
         setEventListeners: function() {
             var self = this;
+            $('.menu-list').popover({ trigger: "hover" });
+            $('.menu-create').popover({ trigger: "hover" });
+            $('.menu-search').popover({ trigger: "hover" });
+            $('.menu-mylist').popover({ trigger: "hover" });
             $('.menu-crud .item a').click(function(ev) {
                 var $el = $(ev.target).closest('.item');
                 $('.menu-crud .item').removeClass('active');
                 $el.addClass("active");
                 if ($el.hasClass('menu-list')) {    
                     $('.searchbar').addClass('hidden');
+                    category=1;
                     self.router.navigate('list', {trigger: true});
                 }
                 if ($el.hasClass('menu-create')) {
@@ -33,6 +39,11 @@ $(function() {
                     $('.searchbar').removeClass('hidden');
                     $('.app-content').html('');
                     self.router.navigate('search?=', {trigger: true});
+                }
+                if ($el.hasClass('menu-mylist')) {
+                    $('.searchbar').addClass('hidden');
+                    category=2;
+                    self.router.navigate('list2', {trigger: true});
                 }
             });
             $('.form-search').unbind('submit').submit(function(ev) {
@@ -75,8 +86,13 @@ $(function() {
            this.router.navigate('list', {trigger: true});
         },
         showList: function() {
-            var $listTemplate = getTemplate('tpl-thesis-list');
-            $('.app-content').html($listTemplate);
+            if (category === 1){
+                var $listTemplate = getTemplate('tpl-thesis-list');
+                $('.app-content').html($listTemplate);
+            } else {
+                var $listTemplate = getTemplate('tpl-thesis-list2');
+                $('.app-content').html($listTemplate);
+            }
         },
         search: function(query, callback) {
             $.get('/api/search/?q=' + query, {
@@ -133,7 +149,11 @@ $(function() {
                 $('.app-content').html("There are no thesis files at the moment.");
             } else {
                 _.each(list, function(item) {
-                    var $thesisItem = $(getTemplate('tpl-thesis-list-item', item));
+                    if (category === 1){
+                        var $thesisItem = $(getTemplate('tpl-thesis-list-item', item));
+                    } else {
+                        var $thesisItem = $(getTemplate('tpl-thesis-list-item2', item));
+                    }
                     var id = item.Id
                     if (item.Key) {
                         id = item.Key;
@@ -235,6 +255,7 @@ $(function() {
             'new': 'onCreate',
             'edit-:id': 'onEdit',
             'list': 'onList',
+            'list2': 'onList',
             'delete-:id': 'onDelete'
        },
        onSearch: function(query) {
