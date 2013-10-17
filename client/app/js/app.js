@@ -162,7 +162,7 @@ $(function() {
             }
             else
             {
-                alert("Forbidden: Thesis title and description are required!");
+                $('#new-thesis-form').html($('#new-thesis-form').html()+ '<em>Please fill up the required fields(*).</em>');
             }           
         },
         deleteThesis: function(id){
