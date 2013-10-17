@@ -21,7 +21,7 @@ $(function() {
                 var $el = $(ev.target).closest('.item');
                 $('.menu-crud .item').removeClass('active');
                 $el.addClass("active");
-                if ($el.hasClass('menu-list')) {
+                if ($el.hasClass('menu-list')) {    
                     $('.search-input').addClass('hidden');
                     self.router.navigate('list', {trigger: true});
                 }
@@ -60,8 +60,14 @@ $(function() {
            $('.btn-login').removeClass('hidden');
         },
         showLogout: function() {
+           var slice = 0;
+           for (i=0;i<this.user.email.length;i++){
+               if (this.user.email[i] == '@'){
+                  slice = i
+               }
+           }
+           $('.user-email').text(this.user.email.slice(0,slice));
            $('.menu-crud').removeClass('hidden');
-           $('.user-email').text(this.user.email);
            $('.menu-loading').addClass('hidden');
            $('.btn-login').addClass('hidden');
            $('.menu-user').removeClass('hidden');
