@@ -31,8 +31,7 @@ $(function() {
                 }
                 if ($el.hasClass('menu-search')) {
                     $('.search-input').removeClass('hidden');
-                    var $listTemplate = getTemplate('tpl-thesis-list');
-                    $('.app-content').html($listTemplate);
+                    $('.app-content').html('');
                     self.router.navigate('search?=', {trigger: true});
                 }
             });
@@ -125,23 +124,27 @@ $(function() {
         },
         displayLoadedList: function(list) {
             var self = this;
-            _.each(list, function(item) {
-                var $thesisItem = $(getTemplate('tpl-thesis-list-item', item));
-                var id = item.Id
-                if (item.Key) {
-                    id = item.Key;
-                }
-                $thesisItem.find('.btn-edit').click(function() {
-                    self.router.navigate('edit-' + id, {trigger: true});
+            if (list.length === 0) {
+                $('.app-content').html("There is no thesis file at the moment.");
+            } else {
+                _.each(list, function(item) {
+                    var $thesisItem = $(getTemplate('tpl-thesis-list-item', item));
+                    var id = item.Id
+                    if (item.Key) {
+                        id = item.Key;
+                    }
+                    $thesisItem.find('.btn-edit').click(function() {
+                        self.router.navigate('edit-' + id, {trigger: true});
+                    });
+                    $thesisItem.find('.btn-view').click(function() {
+                        self.router.navigate('thesis-' + id, {trigger: true});
+                    });
+                    $thesisItem.find('.btn-delete').click(function() {
+                        self.router.navigate('delete-' + id, {trigger: true});
+                    });
+                    $('.thesis-list').append($thesisItem);
                 });
-                $thesisItem.find('.btn-view').click(function() {
-                    self.router.navigate('thesis-' + id, {trigger: true});
-                });
-                $thesisItem.find('.btn-delete').click(function() {
-                    self.router.navigate('delete-' + id, {trigger: true});
-                });
-                $('.thesis-list').append($thesisItem);
-            });
+            }
         },
         save: function(object) {
             var self = this;
@@ -156,8 +159,10 @@ $(function() {
             { 
                 $.post('api/thesis', object, function(res) {
                 self.router.navigate('list', {trigger: true});
+                $('.menu-list').addClass("active");
+                $('.menu-create').removeClass("active");
+                $('.col-md-7').html('<em>A thesis was created/modified.</em>'+$('.col-md-7').html());
                 });
-                alert("A new thesis entry was saved");
                 return false;
             }
             else
@@ -183,7 +188,7 @@ $(function() {
                     return regexStatement.test(thesis.Title);
                });
                if(sorted_list.length == 0){
-                    alert('Sorry. Zero results');
+                    $('.app-content').html('<em>Your search does not have any match.</em>');
                }
                else{
                     var $listTemplate = getTemplate('tpl-thesis-list');
