@@ -98,13 +98,12 @@
         </script>
 
         <script id="tpl-thesis-detail" type="text/x-handlebars-template">
-                <h2 id="thesis-title">{{Title}}</h2>
+                <center><h2 id="thesis-title">{{Title}}</h2>
                 <h3 id="thesis-subtitle">{{Subtitle}}</h3>
-                <div class="fb-like" data-href="https://pupcoetm.appspot.com/thesis-{{Id}}" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>
-                <blockquote id="thesis-description"><b>Year:</b> {{Year}} <br><br> <b>Description:</b> {{Description}}</blockquote>
-                <hr>                
+                <h5 id="thesis-year">{{Year}}</h5>
+                <h5>{{Description}}</h5></center><br><br>
+                <div class="fb-like" data-href="https://thefinalprojectofteamjp.appspot.com/thesis-{{Id}}" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>    
                 <div class="fb-comments" data-href="http://localhost:9080/thesis-{{Id}}" data-colorscheme="light" data-numposts="10" data-width="600"></div>
-                
         </script>
 
         <script id="tpl-thesis-form" type="text/x-handlebars-template">
