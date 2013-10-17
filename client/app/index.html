@@ -28,9 +28,10 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav menu-crud">
-                        <li class='menu-list item'><a href="javascript:void(0)"><div class="glyphicon glyphicon-home"></div></a></li>
-                        <li class='menu-create item'><a href="javascript:void(0)"><div class="glyphicon glyphicon-file"></div></a></li>
-                        <li class='menu-search item'><a href="javascript:void(0)"><div class="glyphicon glyphicon-search"></div></a></li>
+                        <li class='menu-list item' data-content="Home" rel="popover" data-placement="bottom"><a href="javascript:void(0)"><div class="glyphicon glyphicon-home"></div></a></li>
+                        <li class='menu-create item'data-content="New" rel="popover" data-placement="bottom"><a href="javascript:void(0)"><div class="glyphicon glyphicon-file"></div></a></li>
+                        <li class='menu-search item' data-content="Search" rel="popover" data-placement="bottom"><a href="javascript:void(0)"><div class="glyphicon glyphicon-search"></div></a></li>
+                        <li class='menu-mylist item' data-content="My List" rel="popover" data-placement="bottom"><a href="javascript:void(0)"><div class="glyphicon glyphicon-list"></div></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class='menu-loading'><a href="#">Please wait...</a></li>
@@ -78,6 +79,20 @@
                     <thead>
                         <tr>
                             <th><center>Thesis</center></th>
+                        </tr>
+                    </thead>
+                    <tbody class='thesis-list'>
+                    </tbody>
+                </table>
+            </div>
+        </script>
+
+        <script id="tpl-thesis-list2" type="text/x-handlebars-template">
+            <div class='col-md-7'>
+                <table class='table table-hover table-bordered table-condensed table-striped'>
+                    <thead>
+                        <tr>
+                            <th><center>Thesis</center></th>
                             <th><center>Options</center></th>
                         </tr>
                     </thead>
@@ -88,6 +103,12 @@
         </script>
 
         <script id="tpl-thesis-list-item" type="text/x-handlebars-template">
+            <tr data-id="{{Id}}">
+                <td><center><strong><a href='javascript:void(0)' class='btn-view'>{{Title}}</a></strong> ({{Year}})</center></td>
+            </tr>
+        </script>
+
+        <script id="tpl-thesis-list-item2" type="text/x-handlebars-template">
             <tr data-id="{{Id}}">
                 <td><center><strong><a href='javascript:void(0)' class='btn-view'>{{Title}}</a></strong> ({{Year}})</center></td>
                 <td><center>
