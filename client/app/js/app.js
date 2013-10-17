@@ -7,7 +7,7 @@ $(function() {
             $('.menu-loading').removeClass('hidden');
             $('.menu-user').addClass('hidden');
             $('.btn-login').addClass('hidden');
-            $('.search-input').addClass('hidden');
+            $('.searchbar').addClass('hidden');
             $('.btn-login').attr('href', '/api/login?url=/');
             $('.btn-logout').attr('href','/api/logout?url=/');
             this.router = new Router();
@@ -22,15 +22,15 @@ $(function() {
                 $('.menu-crud .item').removeClass('active');
                 $el.addClass("active");
                 if ($el.hasClass('menu-list')) {    
-                    $('.search-input').addClass('hidden');
+                    $('.searchbar').addClass('hidden');
                     self.router.navigate('list', {trigger: true});
                 }
                 if ($el.hasClass('menu-create')) {
-                    $('.search-input').addClass('hidden');
+                    $('.searchbar').addClass('hidden');
                     self.router.navigate('new', {trigger: true});
                 }
                 if ($el.hasClass('menu-search')) {
-                    $('.search-input').removeClass('hidden');
+                    $('.searchbar').removeClass('hidden');
                     $('.app-content').html('');
                     self.router.navigate('search?=', {trigger: true});
                 }
