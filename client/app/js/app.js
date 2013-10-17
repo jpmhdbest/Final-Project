@@ -125,7 +125,7 @@ $(function() {
         displayLoadedList: function(list) {
             var self = this;
             if (list.length === 0) {
-                $('.app-content').html("There is no thesis file at the moment.");
+                $('.app-content').html("There are no thesis files at the moment.");
             } else {
                 _.each(list, function(item) {
                     var $thesisItem = $(getTemplate('tpl-thesis-list-item', item));
